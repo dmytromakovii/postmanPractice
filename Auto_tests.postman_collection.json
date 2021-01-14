@@ -1,0 +1,713 @@
+{
+	"info": {
+		"_postman_id": "49839762-48f1-46e4-ae39-daf53eae7b88",
+		"name": "Auto_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "allFieldsFilling",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"  var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"dog name is: \" + jsonData.dog, function () {\r",
+									"    pm.expect(jsonData.dog).to.eql(\"pyosik\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cat name is: \" + jsonData.cat, function () {\r",
+									"    pm.expect(jsonData.cat).to.eql(\"kotik\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/fullupdateuser?email=test@mail.ru&hobby=football&name=testik&name1=pestik&surname1=restik&fathername=papikovich&fathername1=papikovich1&cat=kotik&dog=pyosik&parrot=chicken&cavy=what's_it?&hamster=homa&squirrel=belka&phone=iphone&inn=123456789012&adres=neskazhu&gender=m&birthday=today&date_start=tomorrow",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"fullupdateuser"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test@mail.ru"
+								},
+								{
+									"key": "hobby",
+									"value": "football"
+								},
+								{
+									"key": "name",
+									"value": "testik"
+								},
+								{
+									"key": "name1",
+									"value": "pestik"
+								},
+								{
+									"key": "surname1",
+									"value": "restik"
+								},
+								{
+									"key": "fathername",
+									"value": "papikovich"
+								},
+								{
+									"key": "fathername1",
+									"value": "papikovich1"
+								},
+								{
+									"key": "cat",
+									"value": "kotik"
+								},
+								{
+									"key": "dog",
+									"value": "pyosik"
+								},
+								{
+									"key": "parrot",
+									"value": "chicken"
+								},
+								{
+									"key": "cavy",
+									"value": "what's_it?"
+								},
+								{
+									"key": "hamster",
+									"value": "homa"
+								},
+								{
+									"key": "squirrel",
+									"value": "belka"
+								},
+								{
+									"key": "phone",
+									"value": "iphone"
+								},
+								{
+									"key": "inn",
+									"value": "123456789012"
+								},
+								{
+									"key": "adres",
+									"value": "neskazhu"
+								},
+								{
+									"key": "gender",
+									"value": "m"
+								},
+								{
+									"key": "birthday",
+									"value": "today"
+								},
+								{
+									"key": "date_start",
+									"value": "tomorrow"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userRegisterTest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=test@mail.ru&name=tester&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "randomGlobalVariableValue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Users added, Gender is defined\", function () {\r",
+									"   var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.gender).to.eql(\"\");\r",
+									"  });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=test{{$randomIP}}@mail.ru&name=tester {{$randomInt}}&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test{{$randomIP}}@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester {{$randomInt}}"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "status200okTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=asdf2@mail.ru&name=tester&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "asdf2@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "status400Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=asdf2@mail.ru&name=tester&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "asdf2@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "messageTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Message is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\" email asdf2@mail.rukj уже есть в базе\");\r",
+									"});\r",
+									"\r",
+									"//второй вариант теста\r",
+									"\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message) === \" email asdf2@mail.rukj уже есть в базе\";\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=asdf2@mail.ru&name=tester&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "asdf2@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "messageCodeAndTypeTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\" email test@mail.ru уже есть в базе\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=test@mail.ru&name=tester&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "headersAndResponseTimeTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Connection is present\", function () {\r",
+									"    pm.response.to.have.header(\"Connection\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Connection is present\", function () {\r",
+									"    pm.response.to.have.header(\"New\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=test@mail.ru&name=tester&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "successUserRegisterTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Users added, Gender is defined\", function () {\r",
+									"   var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.gender).to.eql(\"\");\r",
+									"  });\r",
+									"     \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregiste?email=emkjkailik@gmail.com&name=namkjkjik999&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregiste"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "emkjkailik@gmail.com"
+								},
+								{
+									"key": "name",
+									"value": "namkjkjik999"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userCreateFromFile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Users added, Gender is defined\", function () {\r",
+									"   var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.gender).to.eql(\"\");\r",
+									"  });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email={{email}}&name={{name}}&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "{{email}}"
+								},
+								{
+									"key": "name",
+									"value": "{{name}}"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "createAndChangeUser",
+			"item": [
+				{
+					"name": "userRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"email\", jsonData.email);\r",
+									"pm.environment.set(\"name\", jsonData.name);\r",
+									"\r",
+									"pm.test(\"Users added, Gender is defined\", function () {\r",
+									"   var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.gender).to.eql(\"\");\r",
+									"  });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister?email=test{{$randomInt}}@mail.ru&name=tester{{$randomWords}}&password=1",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test{{$randomInt}}@mail.ru"
+								},
+								{
+									"key": "name",
+									"value": "tester{{$randomWords}}"
+								},
+								{
+									"key": "password",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				},
+				{
+					"name": "dogFieldUpdated",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/useronefield?email={{email}}&field=dog&value={{$randomColor}}",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"useronefield"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "{{email}}"
+								},
+								{
+									"key": "field",
+									"value": "dog"
+								},
+								{
+									"key": "value",
+									"value": "{{$randomColor}}"
+								}
+							]
+						},
+						"description": "Users_test (register)"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
